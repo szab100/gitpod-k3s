@@ -44,9 +44,6 @@ sudo virt-customize -a rootfs.img --run-command 'apt remove openssh-server -y &&
 sudo virt-customize -a rootfs.img --run-command "sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config"
 sudo virt-customize -a rootfs.img --run-command "sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/sshd_config"
 
-# mark as ready
-touch ../rootfs-ready.lock
-tree
 sudo rm -rf /var/tmp/.guestfs-0
-echo "k3s development environment rootfs is ready"
+echo "rootfs image is ready"
 
