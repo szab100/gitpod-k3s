@@ -1,9 +1,9 @@
 image: ghcr.io/szab100/gitpod-k3s-qemu
 checkoutLocation: gitpod-k3s
 tasks:
-  - name: Main
-    command: |
-      /opt/qemu-k3s/prepare-k3s.sh
   - name: K3S (QEMU)
     command: |
       /opt/qemu-k3s/qemu.sh
+  - name: Main
+    command: |
+      /opt/qemu-k3s/prepare-k3s.sh
