@@ -1,6 +1,6 @@
 #!/bin/bash
 
-script_dirname="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+script_dirname=/opt/qemu-k3s
 k3sreadylock="/workspace/k3s-ready.lock"
 
 if test -f "${k3sreadylock}"; then

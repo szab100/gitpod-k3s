@@ -7,9 +7,8 @@ RUN apt update && apt install -y qemu qemu-system-x86 linux-image-$(uname -r) li
 RUN curl -o /usr/bin/kubectl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
 RUN chmod +x /usr/bin/kubectl
 
-WORKDIR /opt/qemu-k3s
-ADD scripts .
-RUN chown -R gitpod:gitpod .
+ADD scripts /opt/qemu-k3s
+RUN chown -R gitpod:gitpod /opt/qemu-k3s
 
-user gitpod
-RUN ./prepare-rootfs.sh
+USER gitpod
+RUN /opt/qemu-k3s/prepare-rootfs.sh

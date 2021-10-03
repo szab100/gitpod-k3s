@@ -2,7 +2,6 @@
 
 set -xeuo pipefail
 
-script_dirname="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 base_image="/opt/qemu-k3s/vm-images/rootfs.img"
 image="/workspace/rootfs.img"
 

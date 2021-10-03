@@ -3,8 +3,6 @@
 set -euo pipefail
 
 img_url="https://cloud-images.ubuntu.com/hirsute/current/hirsute-server-cloudimg-amd64.tar.gz"
-
-script_dirname="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 image_dir="/opt/qemu-k3s/vm-images"
 
 rm -Rf $image_dir
