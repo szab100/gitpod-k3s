@@ -5,14 +5,14 @@ set -euo pipefail
 img_url="https://cloud-images.ubuntu.com/hirsute/current/hirsute-server-cloudimg-amd64.tar.gz"
 
 script_dirname="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
-outdir="${script_dirname}/imgs"
+image_dir="/opt/qemu-k3s/vm-images"
 
-rm -Rf $outdir
-mkdir -p $outdir
+rm -Rf $image_dir
+mkdir -p $image_dir
 
-curl -L -o "${outdir}/rootfs.tar.gz" $img_url
+curl -L -o "${image_dir}/rootfs.tar.gz" $img_url
 
-cd $outdir
+cd $image_dir
 
 tar -xvf rootfs.tar.gz && rm rootfs.tar.gz
 

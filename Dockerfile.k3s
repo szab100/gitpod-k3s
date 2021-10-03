@@ -11,5 +11,5 @@ WORKDIR /opt/qemu-k3s
 ADD scripts .
 RUN chown -R gitpod:gitpod .
 
-USER gitpod
+user gitpod
 RUN ./prepare-rootfs.sh

@@ -15,7 +15,7 @@ function waitssh() {
 
 cd $script_dirname
 
-echo "Waiting for the K3S Cluster (on QEMU VM) to start.."
+echo "Waiting for the QEMU VM to start.."
 waitssh
 export KUBECONFIG=/workspace/.kubeconfig
-echo "✅ K3S is up. 'kubectl' should work from here.."
+echo "✅ VM is up. K3S might take a bit longer to start.."
