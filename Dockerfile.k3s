@@ -1,0 +1,15 @@
+FROM gitpod/workspace-full
+
+USER root
+
+RUN apt update && apt install -y qemu qemu-system-x86 linux-image-$(uname -r) libguestfs-tools sshpass netcat tree \
+    && rm -rf /var/lib/apt/lists/*
+RUN curl -o /usr/bin/kubectl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+RUN chmod +x /usr/bin/kubectl
+
+WORKDIR /opt/qemu-k3s
+ADD scripts .
+RUN chown -R gitpod:gitpod .
+
+USER gitpod
+RUN ./prepare-rootfs.sh
