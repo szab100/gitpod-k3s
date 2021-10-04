@@ -34,7 +34,8 @@ sudo virt-customize -a rootfs.img \
 --copy-in /lib/modules/$(uname -r):/lib/modules \
 --run-command 'apt remove openssh-server -y && apt install openssh-server -y' \
 --run-command "sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config" \
---run-command "sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/sshd_config"
+--run-command "sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/sshd_config" \
+--run-command "sudo chmod -x /etc/update-motd.d/*"
 
 sudo rm -rf /var/tmp/.guestfs-0
 echo "rootfs image is ready"

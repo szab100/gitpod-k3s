@@ -14,7 +14,31 @@ function waitssh() {
   fi
 }
 
-echo "Waiting for the QEMU VM to start.."
+function waitkubectl() {
+  CMD=$(kubectl get pod --all-namespaces 2>&1 >/dev/null)
+  echo -n "."
+  until $CMD
+  do
+    sleep 5
+  done
+}
+
+function fail {
+    printf '%s\n' "$1" >&2
+    exit "${2-1}"
+}
+
+echo "⏳ Waiting for the QEMU VM to start.."
 waitssh
+echo "✅ QEMU VM is up."
+
+if [ ! -f "${k3sreadylock}" ]
+then
+  echo "K3S not found, installer will start shortly.."
+  $script_dirname/install-k3s.sh && echo "✅ K3S installation has completed." || fail "❌ K3S installation has failed.. :("
+fi
+
 export KUBECONFIG=/workspace/.kubeconfig
-[ -f "${k3sreadylock}" ] && echo "✅ VM is up. Once K3S is started, use 'kubectl' or API [:6443] to manage." || echo "✅ VM is up. K3S installer will start shortly.."
+echo "⏳ Waiting until the K3S cluster is ready.."
+waitkubectl
+echo "✅ K3S cluster is up, use 'kubectl' or API [:6443] to manage."
