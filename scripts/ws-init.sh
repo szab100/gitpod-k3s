@@ -15,10 +15,9 @@ function waitssh() {
 }
 
 function waitkubectl() {
-  CMD=$(kubectl get pod --all-namespaces 2>&1 >/dev/null)
-  echo -n "."
-  until $CMD
+  until kubectl get pod --all-namespaces &> /dev/null
   do
+    echo -n "."
     sleep 5
   done
 }
@@ -39,6 +38,7 @@ then
 fi
 
 export KUBECONFIG=/workspace/.kubeconfig
+echo "export KUBECONFIG=/workspace/.kubeconfig" > ~/.bashrc
 echo "⏳ Waiting until the K3S cluster is ready.."
 waitkubectl
 echo "✅ K3S cluster is up, use 'kubectl' or API [:6443] to manage."
