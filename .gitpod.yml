@@ -1,4 +1,5 @@
-image: ghcr.io/szab100/gitpod-k3s-qemu
+image:
+  file: .gitpod.Dockerfile
 checkoutLocation: gitpod-k3s
 tasks:
   - name: K3S (QEMU)
